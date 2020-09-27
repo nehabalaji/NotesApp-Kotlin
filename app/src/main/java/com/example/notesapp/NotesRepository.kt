@@ -47,4 +47,5 @@ class NotesRepository(application: Application) {
             notesDao.UpdateNotes(notes)
         }
     }
+    
 }
