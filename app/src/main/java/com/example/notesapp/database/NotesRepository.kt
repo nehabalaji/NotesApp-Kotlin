@@ -1,9 +1,7 @@
-package com.example.notesapp
+package com.example.notesapp.database
 
 import android.app.Application
 import com.example.notesapp.data.Notes
-import com.example.notesapp.database.NotesDao
-import com.example.notesapp.database.NotesDatabase
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -19,10 +17,13 @@ class NotesRepository(application: Application) {
     companion object{
         private var notesRepository: NotesRepository? = null
         fun getRepository(application: Application): NotesRepository? {
-            if (notesRepository!=null){
+            if (notesRepository !=null){
                 synchronized(NotesRepository::class.java){
-                    if (notesRepository!=null){
-                        notesRepository = NotesRepository(application)
+                    if (notesRepository !=null){
+                        notesRepository =
+                            NotesRepository(
+                                application
+                            )
                     }
                 }
             }
@@ -47,5 +48,10 @@ class NotesRepository(application: Application) {
             notesDao.UpdateNotes(notes)
         }
     }
-    
+
+    fun getAllNotes(){
+        executor.execute {
+            notesDao.getAllNotes()
+        }
+    }
 }

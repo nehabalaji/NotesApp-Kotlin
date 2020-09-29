@@ -1,4 +1,4 @@
-package com.example.notesapp.ui
+package com.example.notesapp.ui.add
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
