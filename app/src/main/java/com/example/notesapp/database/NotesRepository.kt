@@ -1,6 +1,9 @@
 package com.example.notesapp.database
 
 import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.example.notesapp.data.Notes
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -49,9 +52,7 @@ class NotesRepository(application: Application) {
         }
     }
 
-    fun getAllNotes(){
-        executor.execute {
-            notesDao.getAllNotes()
-        }
+    fun getAllNotes(): LiveData<PagedList<Notes>> {
+        return LivePagedListBuilder(notesDao.getAllNotes(), 10).build()
     }
 }
