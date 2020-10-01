@@ -3,8 +3,10 @@ package com.example.notesapp.ui.add
 import android.icu.text.CaseMap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.notesapp.R
+import com.example.notesapp.data.Notes
 import kotlinx.android.synthetic.main.activity_add.*
 
 class AddActivity : AppCompatActivity() {
@@ -43,6 +45,27 @@ class AddActivity : AppCompatActivity() {
             }
 
             button.setText(getString(R.string.update))
+        }
+
+        button.setOnClickListener {
+            val newNotesTitle: String = titleET.text.toString()
+            val newNotesContent: String = contentET.text.toString()
+
+            if(extras!=null && extras.containsKey(extraDataNotesId)){
+                val notesId: Long = extras.getLong(extraDataNotesId)
+                val notes = Notes(newNotesTitle, newNotesContent, notesId)
+                addViewModel.updateNotes(notes)
+                finish()
+            }else{
+
+                if (newNotesTitle.isEmpty() && newNotesContent.isEmpty()){
+                    Toast.makeText(this, "Fill the values", Toast.LENGTH_SHORT)
+                }else{
+                    val notes = Notes(newNotesTitle, newNotesContent)
+                    addViewModel.insertNotes(notes)
+                    finish()
+                }
+            }
         }
     }
 }
