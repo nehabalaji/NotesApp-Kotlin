@@ -20,9 +20,9 @@ class NotesRepository(application: Application) {
     companion object{
         private var notesRepository: NotesRepository? = null
         fun getRepository(application: Application): NotesRepository? {
-            if (notesRepository !=null){
+            if (notesRepository ==null){
                 synchronized(NotesRepository::class.java){
-                    if (notesRepository !=null){
+                    if (notesRepository ==null){
                         notesRepository =
                             NotesRepository(
                                 application
