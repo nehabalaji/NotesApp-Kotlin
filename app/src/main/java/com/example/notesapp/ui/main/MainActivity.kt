@@ -7,6 +7,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesapp.R
 import com.example.notesapp.data.Notes
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         val recyclerView = recycler_view
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         val notesPagingAdapter = NotesPagingAdapter()
         recyclerView.adapter = notesPagingAdapter
